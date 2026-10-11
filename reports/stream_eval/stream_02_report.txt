@@ -1,0 +1,35 @@
+STREAM stream_02  (mode mixed, seed 1044, 10.0 s)
+
+TRUE EVENTS (answer key)
+  swell           3.404 -   3.462 s   {'gain_pu': 1.5, 'severity': 0.572}
+  sag             5.336 -   5.894 s   {'residual_pu': 0.416, 'severity': 0.635}
+  transient       6.305 -   6.313 s   {'freq_hz': 2155.9, 'peak_pu': 0.866, 'severity': 0.629}
+  noise           6.906 -   7.562 s   {'noise_std_pu': 0.118, 'severity': 0.648}
+
+REPORT
+Event 1: swell | 3.404-3.462 s | 58 ms (2.9 cycles) | CNN confidence 100 %
+    RMS 1.50 p.u. (345 V), deviation 50 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 2: sag | 5.336-5.894 s | 558 ms (27.9 cycles) | CNN confidence 100 %
+    RMS 0.41 p.u. (96 V), deviation 58 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 3: transient | 6.305-6.312 s | 8 ms (0.4 cycles) | CNN confidence 100 %
+    peak 0.81 p.u., ringing about 2156 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 4: noise | 6.880-7.580 s | 700 ms (35.0 cycles) | CNN confidence 100 %
+    noise 11.5 % of nominal
+    IEEE 1159: noise above the typical IEEE 1159 range (0-1 %), measured 11.5 %
+
+CORRECTION ACTIONS
+  event 1: swell -> gain correction (nominal / measured RMS)
+  event 2: sag -> gain correction (nominal / measured RMS)
+  event 3: transient -> burst replaced by fitted sine
+  event 4: noise -> wavelet denoising
+
+VERIFICATION (against the clean signal)
+  id=1, label=swell, rmse_before=0.3533, rmse_after=0.002258, rms_pu_before=1.499, rms_pu_after=1.001, rms_pu_clean=0.9993, pct_windows_normal_after=100
+  id=2, label=sag, rmse_before=0.4122, rmse_after=0.007431, rms_pu_before=0.4155, rms_pu_after=1.001, rms_pu_clean=0.9983, pct_windows_normal_after=100
+  id=3, label=transient, rmse_before=0.2288, rmse_after=0.0001497, pct_windows_normal_after=100
+  id=4, label=noise, rmse_before=0.1148, rmse_after=0.02937, noise_pct_before=11.47, noise_pct_after=2.935, pct_windows_normal_after=4.762
+
+DETECTION: matched 4/4, missed 0, false alarms 0, labels correct 4

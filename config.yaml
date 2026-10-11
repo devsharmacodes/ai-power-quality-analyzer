@@ -1,0 +1,18 @@
+# All settings in one place. Any key left out falls back to the default in src/pqd/config.py.
+f_nominal: 50.0        # grid frequency (Hz)
+v_rms_nominal: 230.0   # nominal RMS voltage (V)
+fs: 10000              # sampling frequency (samples per second); must be a multiple of f_nominal
+window_ms: 200         # CNN window length (200 ms = 10 cycles at 50 Hz)
+step_ms: 20            # how far the window moves each step (20 ms = 1 cycle)
+seed: 42               # makes every random signal repeatable
+base_noise_std: 0.003  # small measurement noise added to every signal (p.u.)
+min_cover: 0.2         # fraction of a window an event must cover to label that window
+lead_s: 0.3            # clean signal kept at the start and end of a stream (s)
+min_gap_s: 0.25        # minimum clean gap between two events (s)
+event_cycles:          # event length range per class (cycles at f_nominal)
+  sag: [2, 30]
+  swell: [2, 30]
+  interruption: [2, 30]
+  harmonics: [5, 40]
+  noise: [5, 40]
+transient_ms: [3.0, 10.0]

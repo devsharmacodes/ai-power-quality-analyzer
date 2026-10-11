@@ -1,0 +1,41 @@
+STREAM stream_04  (mode mixed, seed 1046, 10.0 s)
+
+TRUE EVENTS (answer key)
+  sag             1.093 -   1.395 s   {'residual_pu': 0.649, 'severity': 0.316}
+  sag             4.715 -   4.930 s   {'residual_pu': 0.472, 'severity': 0.559}
+  harmonics       5.772 -   6.168 s   {'thd_pct': 10.41, 'orders': [3, 5, 7], 'severity': 0.313}
+  transient       8.111 -   8.114 s   {'freq_hz': 885.7, 'peak_pu': 0.358, 'severity': 0.065}
+  interruption    9.060 -   9.587 s   {'residual_pu': 0.067, 'severity': 0.252}
+
+REPORT
+Event 1: sag | 1.094-1.395 s | 301 ms (15.1 cycles) | CNN confidence 100 %
+    RMS 0.65 p.u. (149 V), deviation 35 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 2: sag | 4.715-4.930 s | 215 ms (10.7 cycles) | CNN confidence 100 %
+    RMS 0.47 p.u. (109 V), deviation 52 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 3: harmonics | 5.740-6.180 s | 440 ms (22.0 cycles) | CNN confidence 100 %
+    THD 9.4 %, 3rd 6.76 %, 5th 4.64 %, 7th 4.59 %
+    IEEE 1159: harmonic distortion (steady state, typical 0-20 %)
+Event 4: transient | 8.110-8.111 s | 1 ms (0.0 cycles) | CNN confidence 99 %
+    peak 0.36 p.u., ringing about 1282 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 5: interruption | 9.060-9.587 s | 527 ms (26.4 cycles) | CNN confidence 100 %
+    RMS 0.07 p.u. (16 V), deviation 93 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+
+CORRECTION ACTIONS
+  event 1: sag -> gain correction (nominal / measured RMS)
+  event 2: sag -> gain correction (nominal / measured RMS)
+  event 3: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 4: transient -> burst replaced by fitted sine
+  event 5: interruption -> sine rebuilt from nearby cycles (an estimate)
+
+VERIFICATION (against the clean signal)
+  id=1, label=sag, rmse_before=0.2479, rmse_after=0.004634, rms_pu_before=0.6485, rms_pu_after=0.9993, rms_pu_clean=0.9991, pct_windows_normal_after=100
+  id=2, label=sag, rmse_before=0.3761, rmse_after=0.007798, rms_pu_before=0.4752, rms_pu_after=1, rms_pu_clean=1.007, pct_windows_normal_after=100
+  id=3, label=harmonics, rmse_before=0.06998, rmse_after=0.01545, thd_pct_before=9.401, thd_pct_after=0.8066, pct_windows_normal_after=31.03
+  id=4, label=transient, rmse_before=0.1826, rmse_after=0.0003665, pct_windows_normal_after=100
+  id=5, label=interruption, rmse_before=0.6581, rmse_after=0.0001124, rms_pu_before=0.06727, rms_pu_after=0.9979, rms_pu_clean=0.9978, pct_windows_normal_after=100
+
+DETECTION: matched 4/5, missed 1, false alarms 1, labels correct 4

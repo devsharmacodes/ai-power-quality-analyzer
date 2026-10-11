@@ -1,0 +1,35 @@
+STREAM stream_01  (mode mixed, seed 1043, 10.0 s)
+
+TRUE EVENTS (answer key)
+  transient       0.716 -   0.722 s   {'freq_hz': 1236.3, 'peak_pu': 0.755, 'severity': 0.505}
+  swell           3.428 -   3.953 s   {'gain_pu': 1.275, 'severity': 0.251}
+  swell           4.604 -   4.724 s   {'gain_pu': 1.502, 'severity': 0.574}
+  sag             8.846 -   9.216 s   {'residual_pu': 0.736, 'severity': 0.197}
+
+REPORT
+Event 1: transient | 0.716-0.720 s | 4 ms (0.2 cycles) | CNN confidence 100 %
+    peak 0.75 p.u., ringing about 1238 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 2: swell | 3.428-3.954 s | 526 ms (26.3 cycles) | CNN confidence 100 %
+    RMS 1.27 p.u. (293 V), deviation 28 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 3: swell | 4.604-4.724 s | 120 ms (6.0 cycles) | CNN confidence 98 %
+    RMS 1.51 p.u. (348 V), deviation 51 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 4: sag | 8.846-9.216 s | 370 ms (18.5 cycles) | CNN confidence 99 %
+    RMS 0.74 p.u. (169 V), deviation 26 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+
+CORRECTION ACTIONS
+  event 1: transient -> burst replaced by fitted sine
+  event 2: swell -> gain correction (nominal / measured RMS)
+  event 3: swell -> gain correction (nominal / measured RMS)
+  event 4: sag -> gain correction (nominal / measured RMS)
+
+VERIFICATION (against the clean signal)
+  id=1, label=transient, rmse_before=0.2548, rmse_after=0.000111, pct_windows_normal_after=100
+  id=2, label=swell, rmse_before=0.1946, rmse_after=0.002831, rms_pu_before=1.275, rms_pu_after=0.9996, rms_pu_clean=0.9994, pct_windows_normal_after=100
+  id=3, label=swell, rmse_before=0.355, rmse_after=0.007284, rms_pu_before=1.502, rms_pu_after=0.9936, rms_pu_clean=1, pct_windows_normal_after=100
+  id=4, label=sag, rmse_before=0.1864, rmse_after=0.004018, rms_pu_before=0.7363, rms_pu_after=1, rms_pu_clean=1, pct_windows_normal_after=100
+
+DETECTION: matched 4/4, missed 0, false alarms 0, labels correct 4

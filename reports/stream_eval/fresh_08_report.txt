@@ -1,0 +1,41 @@
+STREAM fresh_08  (mode mixed, seed 5050, 10.0 s)
+
+TRUE EVENTS (answer key)
+  interruption    0.700 -   1.252 s   {'residual_pu': 0.061, 'severity': 0.324}
+  interruption    3.453 -   3.574 s   {'residual_pu': 0.052, 'severity': 0.419}
+  interruption    4.117 -   4.564 s   {'residual_pu': 0.012, 'severity': 0.871}
+  harmonics       5.767 -   6.242 s   {'thd_pct': 22.36, 'orders': [3, 5, 7], 'severity': 0.898}
+  interruption    6.562 -   6.965 s   {'residual_pu': 0.067, 'severity': 0.259}
+
+REPORT
+Event 1: interruption | 0.700-1.252 s | 552 ms (27.6 cycles) | CNN confidence 99 %
+    RMS 0.06 p.u. (14 V), deviation 94 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 2: interruption | 3.453-3.574 s | 120 ms (6.0 cycles) | CNN confidence 100 %
+    RMS 0.05 p.u. (12 V), deviation 95 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 3: interruption | 4.117-4.564 s | 447 ms (22.4 cycles) | CNN confidence 100 %
+    RMS 0.01 p.u. (3 V), deviation 99 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 4: harmonics | 5.740-6.260 s | 520 ms (26.0 cycles) | CNN confidence 100 %
+    THD 20.5 %, 3rd 14.17 %, 5th 13.77 %, 7th 5.56 %
+    IEEE 1159: harmonic distortion above the typical IEEE 1159 range (0-20 %)
+Event 5: interruption | 6.562-6.965 s | 403 ms (20.2 cycles) | CNN confidence 100 %
+    RMS 0.07 p.u. (15 V), deviation 93 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+
+CORRECTION ACTIONS
+  event 1: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 2: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 3: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 4: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 5: interruption -> sine rebuilt from nearby cycles (an estimate)
+
+VERIFICATION (against the clean signal)
+  id=1, label=interruption, rmse_before=0.6637, rmse_after=0.004753, rms_pu_before=0.06092, rms_pu_after=0.9978, rms_pu_clean=0.9994, pct_windows_normal_after=100
+  id=2, label=interruption, rmse_before=0.6708, rmse_after=7.812e-05, rms_pu_before=0.05269, rms_pu_after=1.001, rms_pu_clean=1.001, pct_windows_normal_after=100
+  id=3, label=interruption, rmse_before=0.6978, rmse_after=0.0001952, rms_pu_before=0.01231, rms_pu_after=0.9985, rms_pu_clean=0.9983, pct_windows_normal_after=100
+  id=4, label=harmonics, rmse_before=0.1515, rmse_after=0.03017, thd_pct_before=20.53, thd_pct_after=1.433, pct_windows_normal_after=33.33
+  id=5, label=interruption, rmse_before=0.662, rmse_after=3.737e-05, rms_pu_before=0.06698, rms_pu_after=1.003, rms_pu_clean=1.003, pct_windows_normal_after=100
+
+DETECTION: matched 5/5, missed 0, false alarms 0, labels correct 5

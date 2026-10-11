@@ -1,0 +1,41 @@
+STREAM stream_03  (mode mixed, seed 1045, 10.0 s)
+
+TRUE EVENTS (answer key)
+  transient       0.441 -   0.448 s   {'freq_hz': 2166.7, 'peak_pu': 0.819, 'severity': 0.577}
+  noise           3.409 -   4.038 s   {'noise_std_pu': 0.044, 'severity': 0.033}
+  swell           5.839 -   6.186 s   {'gain_pu': 1.557, 'severity': 0.652}
+  swell           7.210 -   7.446 s   {'gain_pu': 1.241, 'severity': 0.202}
+  harmonics       7.712 -   7.888 s   {'thd_pct': 17.75, 'orders': [3, 5, 7], 'severity': 0.597}
+
+REPORT
+Event 1: transient | 0.440-0.446 s | 6 ms (0.3 cycles) | CNN confidence 100 %
+    peak 0.70 p.u., ringing about 2166 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 2: noise | 3.400-4.060 s | 660 ms (33.0 cycles) | CNN confidence 97 %
+    noise 4.3 % of nominal
+    IEEE 1159: noise above the typical IEEE 1159 range (0-1 %), measured 4.3 %
+Event 3: swell | 5.839-6.186 s | 347 ms (17.4 cycles) | CNN confidence 100 %
+    RMS 1.56 p.u. (358 V), deviation 56 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 4: swell | 7.210-7.447 s | 236 ms (11.8 cycles) | CNN confidence 97 %
+    RMS 1.24 p.u. (285 V), deviation 24 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 5: harmonics | 7.680-7.920 s | 240 ms (12.0 cycles) | CNN confidence 100 %
+    THD 13.2 %, 3rd 9.39 %, 5th 7.47 %, 7th 5.54 %
+    IEEE 1159: harmonic distortion (steady state, typical 0-20 %)
+
+CORRECTION ACTIONS
+  event 1: transient -> burst replaced by fitted sine
+  event 2: noise -> wavelet denoising
+  event 3: swell -> gain correction (nominal / measured RMS)
+  event 4: swell -> gain correction (nominal / measured RMS)
+  event 5: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+
+VERIFICATION (against the clean signal)
+  id=1, label=transient, rmse_before=0.2276, rmse_after=0.0002407, pct_windows_normal_after=100
+  id=2, label=noise, rmse_before=0.04301, rmse_after=0.01098, noise_pct_before=4.3, noise_pct_after=1.096, pct_windows_normal_after=77.5
+  id=3, label=swell, rmse_before=0.3938, rmse_after=0.003634, rms_pu_before=1.557, rms_pu_after=1, rms_pu_clean=1, pct_windows_normal_after=100
+  id=4, label=swell, rmse_before=0.1704, rmse_after=0.003321, rms_pu_before=1.239, rms_pu_after=1, rms_pu_clean=0.9984, pct_windows_normal_after=100
+  id=5, label=harmonics, rmse_before=0.1083, rmse_after=0.03867, thd_pct_before=13.22, thd_pct_after=1.948, pct_windows_normal_after=0
+
+DETECTION: matched 5/5, missed 0, false alarms 0, labels correct 5

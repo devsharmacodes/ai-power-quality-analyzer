@@ -1,0 +1,35 @@
+STREAM fresh_02  (mode mixed, seed 5044, 10.0 s)
+
+TRUE EVENTS (answer key)
+  sag             0.929 -   1.132 s   {'residual_pu': 0.831, 'severity': 0.067}
+  swell           2.709 -   3.090 s   {'gain_pu': 1.393, 'severity': 0.419}
+  transient       5.060 -   5.069 s   {'freq_hz': 1262.0, 'peak_pu': 0.605, 'severity': 0.338}
+  transient       5.572 -   5.579 s   {'freq_hz': 1566.1, 'peak_pu': 1.035, 'severity': 0.817}
+
+REPORT
+Event 1: sag | 0.929-1.132 s | 202 ms (10.1 cycles) | CNN confidence 99 %
+    RMS 0.83 p.u. (191 V), deviation 17 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 2: swell | 2.709-3.090 s | 381 ms (19.0 cycles) | CNN confidence 100 %
+    RMS 1.39 p.u. (320 V), deviation 39 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 3: transient | 5.060-5.065 s | 5 ms (0.2 cycles) | CNN confidence 100 %
+    peak 0.60 p.u., ringing about 1262 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 4: transient | 5.572-5.577 s | 5 ms (0.3 cycles) | CNN confidence 100 %
+    peak 0.83 p.u., ringing about 1567 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+
+CORRECTION ACTIONS
+  event 1: sag -> gain correction (nominal / measured RMS)
+  event 2: swell -> gain correction (nominal / measured RMS)
+  event 3: transient -> burst replaced by fitted sine
+  event 4: transient -> burst replaced by fitted sine
+
+VERIFICATION (against the clean signal)
+  id=1, label=sag, rmse_before=0.1203, rmse_after=0.003801, rms_pu_before=0.835, rms_pu_after=1.004, rms_pu_clean=1.005, pct_windows_normal_after=100
+  id=2, label=swell, rmse_before=0.2783, rmse_after=0.002421, rms_pu_before=1.395, rms_pu_after=1.003, rms_pu_clean=1.001, pct_windows_normal_after=100
+  id=3, label=transient, rmse_before=0.2136, rmse_after=0.0003182, pct_windows_normal_after=100
+  id=4, label=transient, rmse_before=0.3005, rmse_after=0.0003501, pct_windows_normal_after=100
+
+DETECTION: matched 4/4, missed 0, false alarms 0, labels correct 4

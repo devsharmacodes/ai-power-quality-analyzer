@@ -1,0 +1,47 @@
+STREAM fresh_07  (mode mixed, seed 5049, 10.0 s)
+
+TRUE EVENTS (answer key)
+  noise           0.848 -   1.575 s   {'noise_std_pu': 0.092, 'severity': 0.437}
+  sag             2.321 -   2.865 s   {'residual_pu': 0.341, 'severity': 0.739}
+  transient       4.627 -   4.633 s   {'freq_hz': 2140.7, 'peak_pu': 0.863, 'severity': 0.626}
+  sag             5.398 -   5.930 s   {'residual_pu': 0.363, 'severity': 0.709}
+  sag             7.205 -   7.597 s   {'residual_pu': 0.751, 'severity': 0.176}
+  interruption    8.813 -   9.126 s   {'residual_pu': 0.024, 'severity': 0.729}
+
+REPORT
+Event 1: noise | 0.840-1.600 s | 760 ms (38.0 cycles) | CNN confidence 100 %
+    noise 9.1 % of nominal
+    IEEE 1159: noise above the typical IEEE 1159 range (0-1 %), measured 9.1 %
+Event 2: sag | 2.321-2.865 s | 543 ms (27.2 cycles) | CNN confidence 100 %
+    RMS 0.34 p.u. (78 V), deviation 66 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 3: transient | 4.626-4.631 s | 5 ms (0.3 cycles) | CNN confidence 100 %
+    peak 0.67 p.u., ringing about 2141 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 4: sag | 5.398-5.930 s | 532 ms (26.6 cycles) | CNN confidence 99 %
+    RMS 0.36 p.u. (83 V), deviation 64 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 5: sag | 7.205-7.597 s | 392 ms (19.6 cycles) | CNN confidence 100 %
+    RMS 0.75 p.u. (173 V), deviation 25 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 6: interruption | 8.814-9.126 s | 312 ms (15.6 cycles) | CNN confidence 99 %
+    RMS 0.03 p.u. (6 V), deviation 98 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+
+CORRECTION ACTIONS
+  event 1: noise -> wavelet denoising
+  event 2: sag -> gain correction (nominal / measured RMS)
+  event 3: transient -> burst replaced by fitted sine
+  event 4: sag -> gain correction (nominal / measured RMS)
+  event 5: sag -> gain correction (nominal / measured RMS)
+  event 6: interruption -> sine rebuilt from nearby cycles (an estimate)
+
+VERIFICATION (against the clean signal)
+  id=1, label=noise, rmse_before=0.09124, rmse_after=0.02072, noise_pct_before=9.124, noise_pct_after=2.07, pct_windows_normal_after=20
+  id=2, label=sag, rmse_before=0.465, rmse_after=0.008944, rms_pu_before=0.34, rms_pu_after=0.9999, rms_pu_clean=0.9975, pct_windows_normal_after=100
+  id=3, label=transient, rmse_before=0.24, rmse_after=6.119e-05, pct_windows_normal_after=100
+  id=4, label=sag, rmse_before=0.4511, rmse_after=0.008466, rms_pu_before=0.3629, rms_pu_after=0.9997, rms_pu_clean=1.001, pct_windows_normal_after=100
+  id=5, label=sag, rmse_before=0.1761, rmse_after=0.003982, rms_pu_before=0.7523, rms_pu_after=1, rms_pu_clean=1.001, pct_windows_normal_after=100
+  id=6, label=interruption, rmse_before=0.6896, rmse_after=0.004329, rms_pu_before=0.02467, rms_pu_after=0.9976, rms_pu_clean=0.9995, pct_windows_normal_after=100
+
+DETECTION: matched 6/6, missed 0, false alarms 0, labels correct 6

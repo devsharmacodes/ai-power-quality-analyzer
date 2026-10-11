@@ -1,0 +1,41 @@
+STREAM fresh_09  (mode mixed, seed 5051, 10.0 s)
+
+TRUE EVENTS (answer key)
+  sag             4.426 -   4.473 s   {'residual_pu': 0.24, 'severity': 0.877}
+  swell           5.536 -   5.878 s   {'gain_pu': 1.76, 'severity': 0.943}
+  sag             6.217 -   6.327 s   {'residual_pu': 0.705, 'severity': 0.239}
+  harmonics       7.510 -   7.657 s   {'thd_pct': 12.84, 'orders': [3, 5, 7], 'severity': 0.391}
+  swell           7.945 -   8.394 s   {'gain_pu': 1.114, 'severity': 0.02}
+
+REPORT
+Event 1: sag | 4.426-4.473 s | 46 ms (2.3 cycles) | CNN confidence 100 %
+    RMS 0.25 p.u. (57 V), deviation 75 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 2: swell | 5.536-5.878 s | 342 ms (17.1 cycles) | CNN confidence 100 %
+    RMS 1.76 p.u. (405 V), deviation 76 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 3: sag | 6.217-6.327 s | 110 ms (5.5 cycles) | CNN confidence 99 %
+    RMS 0.71 p.u. (163 V), deviation 29 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 4: harmonics | 7.500-7.680 s | 180 ms (9.0 cycles) | CNN confidence 100 %
+    THD 10.4 %, 3rd 7.2 %, 5th 6.77 %, 7th 3.34 %
+    IEEE 1159: harmonic distortion (steady state, typical 0-20 %)
+Event 5: swell | 7.946-8.396 s | 450 ms (22.5 cycles) | CNN confidence 97 %
+    RMS 1.12 p.u. (257 V), deviation 12 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+
+CORRECTION ACTIONS
+  event 1: sag -> gain correction (nominal / measured RMS)
+  event 2: swell -> gain correction (nominal / measured RMS)
+  event 3: sag -> gain correction (nominal / measured RMS)
+  event 4: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 5: swell -> gain correction (nominal / measured RMS)
+
+VERIFICATION (against the clean signal)
+  id=1, label=sag, rmse_before=0.5532, rmse_after=0.02688, rms_pu_before=0.2469, rms_pu_after=0.9955, rms_pu_clean=1.029, pct_windows_normal_after=100
+  id=2, label=swell, rmse_before=0.5372, rmse_after=0.001713, rms_pu_before=1.759, rms_pu_after=0.9988, rms_pu_clean=0.9991, pct_windows_normal_after=100
+  id=3, label=sag, rmse_before=0.2082, rmse_after=0.004979, rms_pu_before=0.705, rms_pu_after=0.9957, rms_pu_clean=0.9994, pct_windows_normal_after=100
+  id=4, label=harmonics, rmse_before=0.08202, rmse_after=0.03121, thd_pct_before=10.45, thd_pct_after=2.445, pct_windows_normal_after=0
+  id=5, label=swell, rmse_before=0.08071, rmse_after=0.003256, rms_pu_before=1.114, rms_pu_after=0.9983, rms_pu_clean=1, pct_windows_normal_after=100
+
+DETECTION: matched 5/5, missed 0, false alarms 0, labels correct 5

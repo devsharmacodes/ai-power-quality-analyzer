@@ -1,0 +1,35 @@
+STREAM fresh_01  (mode mixed, seed 5043, 10.0 s)
+
+TRUE EVENTS (answer key)
+  interruption    0.463 -   0.920 s   {'residual_pu': 0.007, 'severity': 0.918}
+  interruption    5.384 -   5.905 s   {'residual_pu': 0.087, 'severity': 0.034}
+  noise           7.324 -   7.854 s   {'noise_std_pu': 0.071, 'severity': 0.262}
+  noise           8.124 -   8.407 s   {'noise_std_pu': 0.135, 'severity': 0.789}
+
+REPORT
+Event 1: interruption | 0.463-0.920 s | 457 ms (22.8 cycles) | CNN confidence 100 %
+    RMS 0.01 p.u. (2 V), deviation 99 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 2: interruption | 5.384-5.907 s | 522 ms (26.1 cycles) | CNN confidence 98 %
+    RMS 0.09 p.u. (20 V), deviation 91 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 3: noise | 7.300-7.860 s | 560 ms (28.0 cycles) | CNN confidence 100 %
+    noise 7.0 % of nominal
+    IEEE 1159: noise above the typical IEEE 1159 range (0-1 %), measured 7.0 %
+Event 4: noise | 8.100-8.420 s | 320 ms (16.0 cycles) | CNN confidence 100 %
+    noise 12.4 % of nominal
+    IEEE 1159: noise above the typical IEEE 1159 range (0-1 %), measured 12.5 %
+
+CORRECTION ACTIONS
+  event 1: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 2: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 3: noise -> wavelet denoising
+  event 4: noise -> wavelet denoising
+
+VERIFICATION (against the clean signal)
+  id=1, label=interruption, rmse_before=0.7001, rmse_after=0.0002434, rms_pu_before=0.008396, rms_pu_after=0.9976, rms_pu_clean=0.9972, pct_windows_normal_after=100
+  id=2, label=interruption, rmse_before=0.6442, rmse_after=0.0002356, rms_pu_before=0.08807, rms_pu_after=0.9976, rms_pu_clean=0.9979, pct_windows_normal_after=100
+  id=3, label=noise, rmse_before=0.06979, rmse_after=0.01755, noise_pct_before=6.977, noise_pct_after=1.748, pct_windows_normal_after=48.57
+  id=4, label=noise, rmse_before=0.1245, rmse_after=0.0294, noise_pct_before=12.45, noise_pct_after=2.932, pct_windows_normal_after=8.696
+
+DETECTION: matched 4/4, missed 0, false alarms 0, labels correct 4

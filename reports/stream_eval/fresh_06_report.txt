@@ -1,0 +1,47 @@
+STREAM fresh_06  (mode mixed, seed 5048, 10.0 s)
+
+TRUE EVENTS (answer key)
+  harmonics       2.171 -   2.780 s   {'thd_pct': 11.63, 'orders': [3, 5, 7], 'severity': 0.386}
+  swell           3.192 -   3.282 s   {'gain_pu': 1.157, 'severity': 0.081}
+  swell           4.255 -   4.486 s   {'gain_pu': 1.695, 'severity': 0.85}
+  transient       6.111 -   6.119 s   {'freq_hz': 924.1, 'peak_pu': 0.9, 'severity': 0.666}
+  interruption    8.104 -   8.704 s   {'residual_pu': 0.045, 'severity': 0.494}
+  interruption    9.389 -   9.492 s   {'residual_pu': 0.038, 'severity': 0.574}
+
+REPORT
+Event 1: harmonics | 2.140-2.800 s | 660 ms (33.0 cycles) | CNN confidence 100 %
+    THD 10.8 %, 3rd 8.63 %, 5th 6.08 %, 7th 2.03 %
+    IEEE 1159: harmonic distortion (steady state, typical 0-20 %)
+Event 2: swell | 3.192-3.282 s | 90 ms (4.5 cycles) | CNN confidence 99 %
+    RMS 1.16 p.u. (267 V), deviation 16 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 3: swell | 4.255-4.486 s | 231 ms (11.6 cycles) | CNN confidence 98 %
+    RMS 1.69 p.u. (389 V), deviation 69 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 4: transient | 6.111-6.115 s | 4 ms (0.2 cycles) | CNN confidence 100 %
+    peak 0.74 p.u., ringing about 923 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 5: interruption | 8.104-8.704 s | 600 ms (30.0 cycles) | CNN confidence 100 %
+    RMS 0.05 p.u. (10 V), deviation 95 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 6: interruption | 9.391-9.492 s | 101 ms (5.0 cycles) | CNN confidence 99 %
+    RMS 0.04 p.u. (9 V), deviation 96 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+
+CORRECTION ACTIONS
+  event 1: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 2: swell -> gain correction (nominal / measured RMS)
+  event 3: swell -> gain correction (nominal / measured RMS)
+  event 4: transient -> burst replaced by fitted sine
+  event 5: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 6: interruption -> sine rebuilt from nearby cycles (an estimate)
+
+VERIFICATION (against the clean signal)
+  id=1, label=harmonics, rmse_before=0.0791, rmse_after=0.01499, thd_pct_before=10.75, thd_pct_after=0.6103, pct_windows_normal_after=50
+  id=2, label=swell, rmse_before=0.111, rmse_after=0.00365, rms_pu_before=1.157, rms_pu_after=0.9966, rms_pu_clean=1, pct_windows_normal_after=100
+  id=3, label=swell, rmse_before=0.4927, rmse_after=0.002197, rms_pu_before=1.699, rms_pu_after=1.004, rms_pu_clean=1.002, pct_windows_normal_after=100
+  id=4, label=transient, rmse_before=0.3163, rmse_after=0.0001695, pct_windows_normal_after=100
+  id=5, label=interruption, rmse_before=0.6749, rmse_after=0.0001056, rms_pu_before=0.04559, rms_pu_after=0.9996, rms_pu_clean=0.9998, pct_windows_normal_after=100
+  id=6, label=interruption, rmse_before=0.6787, rmse_after=0.003608, rms_pu_before=0.03832, rms_pu_after=0.9965, rms_pu_clean=0.9979, pct_windows_normal_after=100
+
+DETECTION: matched 6/6, missed 0, false alarms 0, labels correct 6

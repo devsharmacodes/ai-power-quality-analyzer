@@ -1,0 +1,41 @@
+STREAM fresh_04  (mode mixed, seed 5046, 10.0 s)
+
+TRUE EVENTS (answer key)
+  harmonics       1.938 -   2.165 s   {'thd_pct': 24.45, 'orders': [3, 5, 7], 'severity': 0.996}
+  sag             4.412 -   4.753 s   {'residual_pu': 0.271, 'severity': 0.834}
+  noise           6.587 -   6.749 s   {'noise_std_pu': 0.043, 'severity': 0.028}
+  interruption    7.227 -   7.801 s   {'residual_pu': 0.053, 'severity': 0.408}
+  transient       8.774 -   8.778 s   {'freq_hz': 2215.1, 'peak_pu': 1.142, 'severity': 0.935}
+
+REPORT
+Event 1: harmonics | 1.920-2.180 s | 260 ms (13.0 cycles) | CNN confidence 100 %
+    THD 21.1 %, 3rd 14.85 %, 5th 12.25 %, 7th 8.64 %
+    IEEE 1159: harmonic distortion above the typical IEEE 1159 range (0-20 %)
+Event 2: sag | 4.412-4.753 s | 341 ms (17.1 cycles) | CNN confidence 100 %
+    RMS 0.27 p.u. (62 V), deviation 73 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 3: noise | 6.560-6.760 s | 200 ms (10.0 cycles) | CNN confidence 96 %
+    noise 4.0 % of nominal
+    IEEE 1159: noise above the typical IEEE 1159 range (0-1 %), measured 4.0 %
+Event 4: interruption | 7.227-7.801 s | 573 ms (28.7 cycles) | CNN confidence 100 %
+    RMS 0.05 p.u. (12 V), deviation 95 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+Event 5: transient | 8.774-8.778 s | 4 ms (0.2 cycles) | CNN confidence 100 %
+    peak 1.04 p.u., ringing about 2217 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+
+CORRECTION ACTIONS
+  event 1: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 2: sag -> gain correction (nominal / measured RMS)
+  event 3: noise -> wavelet denoising
+  event 4: interruption -> sine rebuilt from nearby cycles (an estimate)
+  event 5: transient -> burst replaced by fitted sine
+
+VERIFICATION (against the clean signal)
+  id=1, label=harmonics, rmse_before=0.1605, rmse_after=0.04718, thd_pct_before=21.1, thd_pct_after=3.227, pct_windows_normal_after=0
+  id=2, label=sag, rmse_before=0.5156, rmse_after=0.01107, rms_pu_before=0.2712, rms_pu_after=1.001, rms_pu_clean=1, pct_windows_normal_after=100
+  id=3, label=noise, rmse_before=0.03986, rmse_after=0.01028, noise_pct_before=3.984, noise_pct_after=1.023, pct_windows_normal_after=100
+  id=4, label=interruption, rmse_before=0.6703, rmse_after=7.465e-05, rms_pu_before=0.05346, rms_pu_after=1.001, rms_pu_clean=1.001, pct_windows_normal_after=100
+  id=5, label=transient, rmse_before=0.3086, rmse_after=0.000373, pct_windows_normal_after=100
+
+DETECTION: matched 5/5, missed 0, false alarms 0, labels correct 5

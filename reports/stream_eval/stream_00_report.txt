@@ -1,0 +1,47 @@
+STREAM stream_00  (mode mixed, seed 1042, 10.0 s)
+
+TRUE EVENTS (answer key)
+  transient       0.312 -   0.321 s   {'freq_hz': 1339.1, 'peak_pu': 0.802, 'severity': 0.557}
+  harmonics       0.882 -   1.111 s   {'thd_pct': 16.71, 'orders': [3, 5, 7], 'severity': 0.863}
+  sag             3.603 -   3.970 s   {'residual_pu': 0.287, 'severity': 0.812}
+  harmonics       6.678 -   7.152 s   {'thd_pct': 19.49, 'orders': [3, 5, 7], 'severity': 0.907}
+  sag             7.842 -   8.220 s   {'residual_pu': 0.258, 'severity': 0.852}
+  interruption    9.287 -   9.475 s   {'residual_pu': 0.054, 'severity': 0.402}
+
+REPORT
+Event 1: transient | 0.312-0.318 s | 6 ms (0.3 cycles) | CNN confidence 100 %
+    peak 0.76 p.u., ringing about 1338 Hz
+    IEEE 1159: low-frequency oscillatory transient (below 5 kHz)
+Event 2: harmonics | 0.860-1.120 s | 260 ms (13.0 cycles) | CNN confidence 100 %
+    THD 14.8 %, 3rd 10.71 %, 5th 8.25 %, 7th 5.87 %
+    IEEE 1159: harmonic distortion (steady state, typical 0-20 %)
+Event 3: sag | 3.603-3.971 s | 369 ms (18.4 cycles) | CNN confidence 100 %
+    RMS 0.29 p.u. (66 V), deviation 71 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 4: harmonics | 6.640-7.160 s | 520 ms (26.0 cycles) | CNN confidence 100 %
+    THD 17.8 %, 3rd 13.8 %, 5th 9.31 %, 7th 6.2 %
+    IEEE 1159: harmonic distortion (steady state, typical 0-20 %)
+Event 5: sag | 7.842-8.222 s | 379 ms (19.0 cycles) | CNN confidence 100 %
+    RMS 0.26 p.u. (60 V), deviation 74 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 6: interruption | 9.287-9.475 s | 188 ms (9.4 cycles) | CNN confidence 100 %
+    RMS 0.05 p.u. (12 V), deviation 95 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+
+CORRECTION ACTIONS
+  event 1: transient -> burst replaced by fitted sine
+  event 2: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 3: sag -> gain correction (nominal / measured RMS)
+  event 4: harmonics -> notch filters at the 3rd, 5th and 7th harmonics
+  event 5: sag -> gain correction (nominal / measured RMS)
+  event 6: interruption -> sine rebuilt from nearby cycles (an estimate)
+
+VERIFICATION (against the clean signal)
+  id=1, label=transient, rmse_before=0.2489, rmse_after=0.0002236, pct_windows_normal_after=100
+  id=2, label=harmonics, rmse_before=0.111, rmse_after=0.03144, thd_pct_before=14.75, thd_pct_after=2.312, pct_windows_normal_after=0
+  id=3, label=sag, rmse_before=0.5045, rmse_after=0.02639, rms_pu_before=0.2876, rms_pu_after=0.9988, rms_pu_clean=1.001, pct_windows_normal_after=66.67
+  id=4, label=harmonics, rmse_before=0.1315, rmse_after=0.02662, thd_pct_before=17.76, thd_pct_after=1.323, pct_windows_normal_after=36.36
+  id=5, label=sag, rmse_before=0.5249, rmse_after=0.03704, rms_pu_before=0.2587, rms_pu_after=0.9988, rms_pu_clean=1.001, pct_windows_normal_after=64
+  id=6, label=interruption, rmse_before=0.6657, rmse_after=0.0001497, rms_pu_before=0.05361, rms_pu_after=0.9948, rms_pu_clean=0.9948, pct_windows_normal_after=100
+
+DETECTION: matched 6/6, missed 0, false alarms 0, labels correct 6

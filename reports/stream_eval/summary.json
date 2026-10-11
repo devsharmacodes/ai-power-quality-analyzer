@@ -1,0 +1,126 @@
+{
+  "streams": 15,
+  "events": {
+    "true": 74,
+    "detected": 74,
+    "matched": 73,
+    "label_correct": 73,
+    "false_alarms": 1
+  },
+  "per_class": {
+    "sag": {
+      "true": 18,
+      "matched": 18,
+      "label_correct": 18,
+      "mean_abs_start_err_ms": 0.15555555555555556,
+      "mean_abs_end_err_ms": 0.21666666666666667
+    },
+    "swell": {
+      "true": 16,
+      "matched": 16,
+      "label_correct": 16,
+      "mean_abs_start_err_ms": 0.0875,
+      "mean_abs_end_err_ms": 0.36874999999999997
+    },
+    "harmonics": {
+      "true": 8,
+      "matched": 8,
+      "label_correct": 8,
+      "mean_abs_start_err_ms": 26.2625,
+      "mean_abs_end_err_ms": 17.087500000000002
+    },
+    "interruption": {
+      "true": 14,
+      "matched": 14,
+      "label_correct": 14,
+      "mean_abs_start_err_ms": 0.18571428571428572,
+      "mean_abs_end_err_ms": 0.1357142857142857
+    },
+    "transient": {
+      "true": 11,
+      "matched": 10,
+      "label_correct": 10,
+      "mean_abs_start_err_ms": 0.19,
+      "mean_abs_end_err_ms": 2.1999999999999997
+    },
+    "noise": {
+      "true": 7,
+      "matched": 7,
+      "label_correct": 7,
+      "mean_abs_start_err_ms": 19.357142857142858,
+      "mean_abs_end_err_ms": 16.785714285714285
+    }
+  },
+  "window_accuracy": 0.9683638832315004,
+  "window_macro_f1": 0.9458644327744657,
+  "window_confusion_matrix": [
+    [
+      5483,
+      63,
+      62,
+      26,
+      55,
+      6,
+      21
+    ],
+    [
+      0,
+      399,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      370,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      186,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      360,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      109,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      225
+    ]
+  ],
+  "correction": {
+    "mean_rmse_before": 0.15452581478478758,
+    "mean_rmse_after": 0.006142638927523437,
+    "mean_pct_windows_normal_after": 84.42899035740115
+  }
+}

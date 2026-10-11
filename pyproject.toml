@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pqd"
+version = "0.1.0"
+description = "CNN-based power quality disturbance detection, report and correction"
+requires-python = ">=3.9"
+dependencies = ["numpy", "scipy", "PyWavelets", "torch", "PyYAML"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

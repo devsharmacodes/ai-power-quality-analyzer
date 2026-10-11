@@ -1,0 +1,35 @@
+STREAM fresh_00  (mode mixed, seed 5042, 10.0 s)
+
+TRUE EVENTS (answer key)
+  swell           1.185 -   1.629 s   {'gain_pu': 1.354, 'severity': 0.362}
+  swell           2.851 -   3.323 s   {'gain_pu': 1.799, 'severity': 0.998}
+  sag             3.946 -   4.205 s   {'residual_pu': 0.867, 'severity': 0.018}
+  interruption    5.981 -   6.274 s   {'residual_pu': 0.019, 'severity': 0.785}
+
+REPORT
+Event 1: swell | 1.185-1.631 s | 446 ms (22.3 cycles) | CNN confidence 100 %
+    RMS 1.35 p.u. (311 V), deviation 35 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 2: swell | 2.851-3.323 s | 472 ms (23.6 cycles) | CNN confidence 100 %
+    RMS 1.80 p.u. (414 V), deviation 80 %
+    IEEE 1159: instantaneous swell (1.1-1.8 p.u.)
+Event 3: sag | 3.946-4.205 s | 259 ms (13.0 cycles) | CNN confidence 89 %
+    RMS 0.86 p.u. (198 V), deviation 14 %
+    IEEE 1159: instantaneous sag (0.1-0.9 p.u.)
+Event 4: interruption | 5.981-6.274 s | 293 ms (14.6 cycles) | CNN confidence 100 %
+    RMS 0.02 p.u. (5 V), deviation 98 %
+    IEEE 1159: momentary interruption (below 0.1 p.u.)
+
+CORRECTION ACTIONS
+  event 1: swell -> gain correction (nominal / measured RMS)
+  event 2: swell -> gain correction (nominal / measured RMS)
+  event 3: sag -> gain correction (nominal / measured RMS)
+  event 4: interruption -> sine rebuilt from nearby cycles (an estimate)
+
+VERIFICATION (against the clean signal)
+  id=1, label=swell, rmse_before=0.2497, rmse_after=0.003257, rms_pu_before=1.352, rms_pu_after=0.9997, rms_pu_clean=0.9984, pct_windows_normal_after=100
+  id=2, label=swell, rmse_before=0.5645, rmse_after=0.001654, rms_pu_before=1.798, rms_pu_after=1, rms_pu_clean=0.9998, pct_windows_normal_after=100
+  id=3, label=sag, rmse_before=0.09412, rmse_after=0.004563, rms_pu_before=0.8654, rms_pu_after=1.003, rms_pu_clean=0.9984, pct_windows_normal_after=100
+  id=4, label=interruption, rmse_before=0.6947, rmse_after=0.0002538, rms_pu_before=0.01998, rms_pu_after=1.002, rms_pu_clean=1.002, pct_windows_normal_after=100
+
+DETECTION: matched 4/4, missed 0, false alarms 0, labels correct 4
